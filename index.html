@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Judging Outputs – Grade 9 AI, Week 4 Core</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f5f7fa;--card:#fff;--ink:#14213d;--mut:#55627a;--line:#d8dee9;--ok:#16825a;--bad:#c93a3a;--unc:#b7791f;--acc:#2447c9;--okbg:#e3f5ec;--badbg:#fbe6e6;--uncbg:#fbf0d9}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1523;--card:#18203a;--ink:#eef1f8;--mut:#a6b0c6;--line:#2c3757;--ok:#4cc790;--bad:#f07676;--unc:#e8b34f;--acc:#8aa4ff;--okbg:#12362a;--badbg:#3d1b1f;--uncbg:#3a2f14}}
+*{box-sizing:border-box}html{scroll-padding-top:70px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 "Source Sans 3",system-ui,sans-serif}
+h1,h2,h3{font-family:"Bricolage Grotesque",system-ui,sans-serif;line-height:1.15;margin:.2em 0 .5em}
+h1{font-size:clamp(2rem,6vw,3.2rem);font-weight:800}h2{font-size:1.7rem}h3{font-size:1.15rem}
+header{position:sticky;top:0;z-index:5;background:var(--card);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;gap:12px;align-items:center}
+header b{font-family:"Bricolage Grotesque";white-space:nowrap}
+#bar{flex:1;height:8px;background:var(--line);border-radius:9px;overflow:hidden}#bar i{display:block;height:100%;width:0;background:var(--acc);transition:width .3s}
+#who{font-size:.85rem;color:var(--mut)}
+main{max-width:820px;margin:0 auto;padding:20px 16px 80px}
+.slide{display:none}.slide.on{display:block}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:14px 0}
+.hero{border-left:8px solid var(--acc)}
+.nav{display:flex;justify-content:space-between;gap:10px;margin-top:22px}
+button,.btn{font:600 1rem "Source Sans 3",sans-serif;border:2px solid var(--ink);background:var(--card);color:var(--ink);border-radius:10px;padding:9px 16px;cursor:pointer}
+button.p{background:var(--acc);border-color:var(--acc);color:#fff}button:disabled{opacity:.4;cursor:not-allowed}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+input,select,textarea{font:inherit;width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink)}
+textarea{min-height:70px}label{font-weight:600;display:block;margin:10px 0 4px}
+.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.vocab dt{font-weight:600}.vocab dd{margin:0 0 8px;color:var(--mut)}
+.fb{margin-top:10px;padding:10px 12px;border-radius:8px;display:none}.fb.ok{display:block;background:var(--okbg);color:var(--ok)}.fb.no{display:block;background:var(--badbg);color:var(--bad)}
+.sortitem{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;padding:10px 0;border-top:1px solid var(--line)}
+.sortitem .q{flex:1 1 280px}.v{display:flex;gap:6px}
+.v button{padding:5px 10px;font-size:.9rem}
+.v button.sel.correct{background:var(--ok);border-color:var(--ok);color:#fff}.v button.sel.incorrect{background:var(--bad);border-color:var(--bad);color:#fff}.v button.sel.unclear{background:var(--unc);border-color:var(--unc);color:#fff}
+.mark{font-weight:600;min-width:1.5em}
+.opt{display:block;width:100%;text-align:left;margin:6px 0}.opt.right{background:var(--okbg);border-color:var(--ok)}.opt.wrong{background:var(--badbg);border-color:var(--bad)}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}.tag{padding:3px 10px;border-radius:99px;background:var(--uncbg);font-size:.85rem;font-weight:600}
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:12px 0}.flow span{padding:8px 12px;border-radius:10px;border:2px solid var(--ink);font-weight:600}
+table{border-collapse:collapse;width:100%}td,th{border:1px solid var(--line);padding:6px;vertical-align:top;font-size:.92rem}
+.scroll{overflow-x:auto}table select,table input{min-width:90px}
+#stat{margin:10px 0;font-weight:600}
+@media print{header,.nav,#sub{display:none}.slide{display:block!important}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<header><b>Judging Outputs</b><div id="bar"><i></i></div><span id="who"></span></header>
+<main>
+
+<section class="slide" data-t="Start">
+<div class="card hero"><p>Grade 9 · Main Course · Term 1 Week 4 · Core · about 45 minutes</p>
+<h1>Judging Outputs</h1>
+<p>Today you become an evaluator of AI systems. Instead of trusting an answer because it sounds sure, you decide whether it is <b>correct, incorrect or unclear</b>, and you prove your decision with evidence.</p></div>
+<div class="card"><h3>Before you start</h3>
+<div class="row"><div><label for="nm">Your name</label><input id="nm" autocomplete="off"></div>
+<div><label for="gr">Grade and class</label><input id="gr" placeholder="e.g. 9B"></div></div>
+<p style="color:var(--mut);font-size:.9rem">Only your name and class are saved. This week uses no live AI tool and no logins.</p></div>
+<div class="card"><h3>What you will learn</h3><ul>
+<li>I can tell when an AI output is incorrect or unclear and say which criterion it fails.</li>
+<li>I can judge an output against agreed criteria, back each judgement with evidence, and trace the fault to a component of the system.</li>
+<li>I can use words like criteria, evidence, accuracy and reliability correctly, and link a judgement to improving a solution.</li></ul></div>
+<div class="card"><h3>Lesson route</h3><div class="flow"><span>1 Incorrect vs unclear</span><span>2 Evidence</span><span>3 Trace to a component</span></div>
+<p>Previously: you built and chained a workflow and proved it solves your problem reliably.</p></div>
+</section>
+
+<section class="slide" data-t="Words">
+<h2>Words to know</h2>
+<div class="card"><dl class="vocab">
+<dt>criteria</dt><dd>The agreed things you judge an output against, such as accuracy, clarity and reliability.</dd>
+<dt>incorrect</dt><dd>The output is factually false when you check it against a trusted source.</dd>
+<dt>unclear</dt><dd>The output is so vague or ambiguous that you cannot tell whether it is right.</dd>
+<dt>evidence</dt><dd>The exact word, fact or step you point to that proves your judgement.</dd>
+<dt>reliability</dt><dd>Whether the same system would give a dependable result again, not a one-off fluke.</dd></dl></div>
+<div class="card"><h3>Why it matters</h3><p>Across the UAE, people rely on AI to draft reports, translate and answer questions in seconds. But a wrong figure in a government form or an unclear medical instruction matters. Judging whether an output is correct, clear and reliable before you use it keeps <b>you</b>, not the tool, in charge of the result.</p></div>
+<div class="card"><h3>Your toolkit this week</h3><p>Unplugged: the teacher runs a simulated-AI card routine. You reason about pre-prepared example outputs. No personal data is used. Teachable Machine and Scratch come back in the Lab.</p></div>
+</section>
+
+<section class="slide" data-t="Part 1">
+<h2>Part 1 of 3: Two kinds of fault</h2>
+<div class="card"><p>An output is <b>incorrect</b> when it states something false that you can check against a trusted source. It is <b>unclear</b> when you cannot tell what it means or whether it is right.</p>
+<div class="row"><div class="card" style="background:var(--badbg)"><b>Incorrect</b><br>The facts are wrong. <b>Fix:</b> correct the facts using a trusted source.</div>
+<div class="card" style="background:var(--uncbg)"><b>Unclear</b><br>There is not enough detail. <b>Fix:</b> add detail and context, make the prompt specific.</div></div>
+<p>Naming which fault you found is the first move of a good evaluator.</p></div>
+<div class="card"><h3>Give each output a verdict</h3><p>Sort each output into correct, unclear or incorrect.</p><div id="sort"></div><div id="sortfb" class="fb"></div></div>
+<div class="card" id="case1"></div>
+</section>
+
+<section class="slide" data-t="Part 2">
+<h2>Part 2 of 3: Trace the fault</h2>
+<div class="card"><p>An AI system is made of components that interact. When an output is incorrect or unclear, the fault usually sits in one of them, not in some mysterious brain.</p>
+<div class="flow"><span>DATA: information you provide</span><span>PROMPT: instructions you give</span><span>TOOL: what runs it</span><span>OUTPUT: incorrect or unclear?</span></div>
+<p>Fixing the right component improves the whole system, instead of just running it again and hoping.</p></div>
+<div class="card"><h3>Order the evaluator’s moves</h3><p>Tap the steps in the order a skilled evaluator works, first to last.</p><div id="order"></div><button id="oreset">Start again</button><div id="orderfb" class="fb"></div></div>
+<div class="card" id="case2"></div>
+</section>
+
+<section class="slide" data-t="Part 3">
+<h2>Part 3 of 3: Clear can still be wrong</h2>
+<div class="card"><p>A model generates text by predicting likely words, not by knowing what is true. So a fluent, confident answer can still be wrong or vague. An output can be perfectly clear and still be incorrect, which is exactly why you verify the fact.</p>
+<p>Skilled evaluators cite specific evidence for every judgement and trace the fault back to its component.</p></div>
+<div class="card"><h3>Which statements are true?</h3><p>Select the <b>three</b> true statements, then check.</p><div id="tf"></div><button id="tfgo" class="p">Check my answer</button><div id="tffb" class="fb"></div></div>
+<div class="card" id="case3"></div>
+<div class="card"><h3>Think about it</h3><p>Could an output be perfectly clear and still be incorrect? What would that look like, and why is it dangerous?</p><textarea id="think"></textarea></div>
+</section>
+
+<section class="slide" data-t="Mission">
+<h2>Away from the screen: The Evaluation Panel</h2>
+<div class="card"><p>Act as an evaluation panel. Judge a set of AI outputs for one task against agreed criteria, decide whether each is correct, incorrect or unclear, and trace every fault to its component.</p>
+<p><b>You need:</b> output card set, criteria reference card (accuracy, clarity, reliability), trusted-source sheet, evidence sticky notes, component tags (data / prompt / tool).</p>
+<ol><li>As a class, agree the criteria: accuracy, clarity and reliability.</li><li>Read the task the outputs were meant to complete.</li><li>Decide correct, incorrect or unclear for each output, against every criterion.</li><li>Write one piece of evidence for every verdict: the exact word, fact or step.</li><li>Verify one output against a trusted source to test whether a confident answer is accurate.</li><li>Name the component behind each fault and share your strongest judgement.</li></ol>
+<p>No display? Use the printed cards: sort into correct, incorrect and unclear piles, each with an evidence note and a component tag.</p></div>
+<div class="card"><h3>English link</h3><p>Evaluate a piece of writing against success criteria, citing the exact word or fact as evidence, and separate a factual error from merely unclear expression.</p></div>
+</section>
+
+<section class="slide" data-t="Summary">
+<h2>Lesson summary</h2>
+<div class="card"><ul><li>Incorrect means false against a trusted source; unclear means you cannot tell.</li><li>Every judgement points to specific evidence, not a general impression.</li><li>A fault usually sits in a component (data, prompt or tool), not a mysterious brain.</li><li>Fixing the right component improves the whole system, not just one re-run.</li></ul></div>
+<div class="card"><h3>I can…</h3><label><input type="checkbox" class="ic" style="width:auto"> tell incorrect from unclear and name the criterion it fails</label><label><input type="checkbox" class="ic" style="width:auto"> judge against criteria, give evidence and trace the fault</label><label><input type="checkbox" class="ic" style="width:auto"> use criteria, evidence, accuracy and reliability correctly</label></div>
+<div class="card"><p><b>Where this leads:</b> in the Lab you rank a whole messy set best to worst and fix the weakest one.</p></div>
+</section>
+
+<section class="slide" data-t="Worksheet">
+<h2>Student worksheet</h2>
+<div class="card"><h3>Judge each output against the criteria</h3>
+<p>Choose ✔ correct, ✘ incorrect or ? unclear for each criterion, then add evidence and the component behind any fault.</p>
+<div class="scroll"><table id="grid"><tr><th>Output</th><th>Accuracy</th><th>Clarity</th><th>Reliability</th><th>Evidence</th><th>Component</th></tr></table></div></div>
+<div class="card"><label for="w1">Incorrect or unclear? Pick one faulty output, say which, and explain in one line how you can tell.</label><textarea id="w1"></textarea>
+<label for="w2">Verify one fact: the trusted source you checked and whether it held up.</label><textarea id="w2"></textarea></div>
+<div class="card"><label for="w3">Exit ticket: choose one output, say whether it is correct, incorrect or unclear, and write the single piece of evidence that decided it.</label><textarea id="w3"></textarea>
+<label for="w4">My reflection: the hardest output to judge was … because …</label><textarea id="w4"></textarea></div>
+<div class="card"><label for="w5">Challenge (stretch): re-evaluate two outputs using four criteria (accuracy, clarity, bias, usefulness). How could an output be accurate yet biased or not useful, and which component would you change?</label><textarea id="w5"></textarea></div>
+<div id="sub"><p id="stat"></p><button class="p" id="submit">Submit my worksheet</button> <button onclick="print()">Print / save as PDF</button></div>
+</section>
+
+<section class="slide" data-t="Teacher" id="teacher">
+<h2>Teacher dashboard</h2>
+<div class="card"><p>Shows answers saved by the Google Form. Set <code>SHEET_CSV</code> in the script to your Form’s published sheet (File › Share › Publish to web › CSV).</p><button id="load" class="p">Load responses</button><div id="dash" class="scroll"></div></div>
+</section>
+
+<div class="nav"><button id="prev">Back</button><button id="next" class="p">Next</button></div>
+</main>
+<script>
+/* ===== TEACHER SETUP: paste your Google Form values here ===== */
+const FORM_URL="";   // https://docs.google.com/forms/d/e/FORM_ID/formResponse
+const ENTRY={name:"",grade:"",score:"",answers:""}; // e.g. "entry.123456789"
+const SHEET_CSV="";  // published CSV link of the Form's response sheet
+/* ============================================================ */
+const $=id=>document.getElementById(id),S=[...document.querySelectorAll(".slide")];
+const isT=location.hash==="#teacher";if(!isT)$("teacher").remove();
+const slides=[...document.querySelectorAll(".slide")];let cur=0;const score={};
+function show(i){cur=Math.max(0,Math.min(slides.length-1,i));slides.forEach((s,k)=>s.classList.toggle("on",k===cur));
+ $("bar").firstChild.style.width=((cur+1)/slides.length*100)+"%";$("prev").disabled=cur==0;$("next").disabled=cur==slides.length-1||(cur==0&&!($("nm").value.trim()&&$("gr").value.trim()));
+ $("next").style.visibility=cur==slides.length-1?"hidden":"visible";scrollTo(0,0)}
+$("prev").onclick=()=>show(cur-1);$("next").onclick=()=>{$("who").textContent=$("nm").value+" · "+$("gr").value;show(cur+1)};
+["nm","gr"].forEach(i=>$(i).oninput=()=>show(cur));
+/* Part 1 sort */
+const items=[["‘Sales rose to 4,200 units’, and the trusted source confirms 4,200.","correct"],["‘The capital of Australia is Sydney’, but the source says Canberra.","incorrect"],["‘2 + 2 = 5’, which is false when you check it.","incorrect"],["‘It depends on a few things, really’, and you cannot tell what it means.","unclear"],["‘The report lists all three figures and each checks out against the source.’","correct"],["‘The result is somewhat better than before’. Better by how much?","unclear"],["‘The translation matches the source text word for word.’","correct"]];
+const picks={};
+$("sort").innerHTML=items.map((it,i)=>`<div class="sortitem"><div class="q">${it[0]}</div><div class="v" data-i="${i}">${["correct","unclear","incorrect"].map(v=>`<button data-v="${v}">${v}</button>`).join("")}</div><span class="mark" id="m${i}"></span></div>`).join("");
+$("sort").onclick=e=>{const b=e.target.closest("button");if(!b)return;const i=+b.parentNode.dataset.i,v=b.dataset.v;picks[i]=v;
+ [...b.parentNode.children].forEach(x=>x.className=x==b?"sel "+v:"");const ok=v==items[i][1];$("m"+i).textContent=ok?"✔":"✘";$("m"+i).style.color=ok?"var(--ok)":"var(--bad)";
+ const done=Object.keys(picks).length,right=items.filter((x,k)=>picks[k]==x[1]).length;score.sort=right;
+ $("sortfb").className="fb "+(right==items.length?"ok":"no");$("sortfb").textContent=right==items.length?"All 7 correct. Check each one: what evidence decided it?":`${right} of ${items.length} correct so far. Re-read the ✘ items: can you check it against a source (incorrect), or can you not tell (unclear)?`}
+/* MCQ cases */
+function mcq(id,title,story,tags,q,opts,ans,why,key){const el=$(id);
+ el.innerHTML=`<h3>${title}</h3><p>${story}</p><div class="tags">${tags.map(t=>`<span class="tag">${t}</span>`).join("")}</div><b>${q}</b>${opts.map((o,i)=>`<button class="opt" data-i="${i}">${"ABCD"[i]}. ${o}</button>`).join("")}<div class="fb"></div>`;
+ el.onclick=e=>{const b=e.target.closest(".opt");if(!b)return;const i=+b.dataset.i,fb=el.querySelector(".fb");
+ if(i==ans){b.classList.add("right");fb.className="fb ok";fb.textContent="Yes. "+why;score[key]=1}else{b.classList.add("wrong");fb.className="fb no";fb.textContent="Not quite. Look again at the evidence in the case.";score[key]=score[key]||0}}}
+mcq("case1","Case 1: The Confident Wrong Answer","An output states a figure with total confidence, but the trusted source shows a different number. Detective, what is your verdict?",["Confident output","Trusted source","Mismatch"],"What is your verdict?",["It is correct, because it sounds so sure of itself.","It is unclear, since it sounds confident and detailed.","It cannot be judged against any source at all here.","It is false, checked against a trusted source."],3,"Confidence is not evidence. Checked against the source, it is incorrect.","c1");
+mcq("case2","Case 2: The Wandering Answer","The data was solid and the tool was right for the job, but the instruction just said ‘tell me about it’. The output wandered off task. Detective, which component caused it?",["Good data","Vague prompt","Off-task output"],"Which component caused the fault?",["No component: the output is just random noise.","The tool: it must simply be faulty.","The data: it must have been incomplete or biased.","The prompt: it was too vague to steer the tool."],3,"Data and tool were fine, so the vague prompt is the cause. Sharpen the prompt.","c2");
+mcq("case3","Case 3: The Clear but False Line","An instruction reads clearly and simply, so anyone could follow it, yet the fact inside it is wrong. Detective, why is this the dangerous kind of fault?",["Clear output","False fact","Risk"],"Why is a clear-but-incorrect output dangerous?",["Clear outputs are slow to make.","It reads as trustworthy, so a false fact slips past.","It is too vague to use at all.","It is not dangerous, since a clear output must be true."],1,"Clear sounds trustworthy, which is why you must verify the fact.","c3");
+/* ordering */
+const steps=["Judge the output: correct, unclear or incorrect","Name the criterion it fails: accuracy, clarity or reliability","Point to the evidence: the exact word, fact or step","Trace the fault to a component: data, prompt or tool"];
+let seq=[];const shuf=[2,0,3,1];
+function drawOrder(){$("order").innerHTML=shuf.map(i=>`<button class="opt" data-i="${i}" ${seq.includes(i)?"disabled":""}>${seq.includes(i)?seq.indexOf(i)+1+". ":""}${steps[i]}</button>`).join("")}
+drawOrder();$("order").onclick=e=>{const b=e.target.closest("button");if(!b)return;seq.push(+b.dataset.i);drawOrder();
+ if(seq.length==4){const ok=seq.every((v,k)=>v==k);score.order=ok?1:0;$("orderfb").className="fb "+(ok?"ok":"no");$("orderfb").textContent=ok?"Correct order: verdict, criterion, evidence, component.":"Not the right order yet. Press Start again. Hint: you must judge before you can explain."}}
+$("oreset").onclick=()=>{seq=[];$("orderfb").className="fb";drawOrder()};
+/* true/false */
+const tf=[["The fault always sits in the tool alone.",0],["Fixing the right component improves the whole system.",1],["Every verdict needs evidence.",1],["Re-running the tool is enough to fix a fault.",0],["A fluent, confident answer is always accurate.",0],["An output can be perfectly clear and still be incorrect.",1]];
+$("tf").innerHTML=tf.map((t,i)=>`<label style="font-weight:400"><input type="checkbox" style="width:auto" data-i="${i}"> ${t[0]}</label>`).join("");
+$("tfgo").onclick=()=>{const c=[...document.querySelectorAll("#tf input")];const ok=c.every((x,i)=>x.checked==!!tf[i][1]);score.tf=ok?1:0;
+ $("tffb").className="fb "+(ok?"ok":"no");$("tffb").textContent=ok?"Right. Fault sits in a component, evidence backs every verdict, and clear is not the same as accurate.":"Not quite. Choose exactly three. Ask: does each statement match what you learned about evidence, components and confidence?"};
+/* worksheet grid */
+const sel=n=>`<select data-k="${n}"><option value="">–</option><option>✔ correct</option><option>✘ incorrect</option><option>? unclear</option></select>`;
+document.getElementById("grid").insertAdjacentHTML("beforeend",["A","B","C"].map(o=>`<tr><td><b>${o}</b></td><td>${sel(o+"_acc")}</td><td>${sel(o+"_clr")}</td><td>${sel(o+"_rel")}</td><td><input data-k="${o}_ev"></td><td><select data-k="${o}_comp"><option value="">–</option><option>data</option><option>prompt</option><option>tool</option><option>none</option></select></td></tr>`).join(""));
+function collect(){const a={};document.querySelectorAll("[data-k]").forEach(x=>a[x.dataset.k]=x.value);["think","w1","w2","w3","w4","w5"].forEach(i=>a[i]=$(i).value);a.iCan=[...document.querySelectorAll(".ic")].filter(x=>x.checked).length;return a}
+$("submit").onclick=async()=>{const total=score.sort||0,pts=total+["c1","c2","c3","order","tf"].reduce((s,k)=>s+(score[k]||0),0),mx=items.length+5;
+ const row={name:$("nm").value,grade:$("gr").value,score:pts+"/"+mx,answers:JSON.stringify(collect())};
+ try{localStorage.setItem("judging-outputs",JSON.stringify(row))}catch(e){}
+ if(!FORM_URL){$("stat").textContent="Saved on this device only. Your teacher has not connected the Google Form yet.";return}
+ const fd=new FormData();for(const k in ENTRY)fd.append(ENTRY[k],row[k]);
+ try{await fetch(FORM_URL,{method:"POST",mode:"no-cors",body:fd});$("stat").textContent="Submitted. Well done, "+row.name+". Your score on the activities: "+row.score}catch(e){$("stat").textContent="Could not submit. Check your connection and press Submit again."}};
+/* teacher dashboard */
+function csv(t){const r=[];let c=[],f="",q=false;for(let i=0;i<t.length;i++){const ch=t[i];if(q){if(ch=='"'&&t[i+1]=='"'){f+='"';i++}else if(ch=='"')q=false;else f+=ch}else if(ch=='"')q=true;else if(ch==","){c.push(f);f=""}else if(ch=="\n"){c.push(f);r.push(c);c=[];f=""}else if(ch!="\r")f+=ch}if(f||c.length){c.push(f);r.push(c)}return r}
+if(isT){$("load").onclick=async()=>{if(!SHEET_CSV){$("dash").textContent="Set SHEET_CSV in the script first.";return}
+ const rows=csv(await (await fetch(SHEET_CSV)).text()).slice(1);const esc=s=>String(s??"").replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+ $("dash").innerHTML="<table><tr><th>Time</th><th>Name</th><th>Class</th><th>Score</th><th>Evidence A/B/C</th><th>Exit ticket</th><th>Reflection</th></tr>"+rows.map(r=>{let a={};try{a=JSON.parse(r[4])}catch(e){}return`<tr><td>${esc(r[0])}</td><td>${esc(r[1])}</td><td>${esc(r[2])}</td><td>${esc(r[3])}</td><td>${esc([a.A_ev,a.B_ev,a.C_ev].join(" | "))}</td><td>${esc(a.w3)}</td><td>${esc(a.w4)}</td></tr>`}).join("")+"</table>"}}
+show(0);
+</script></body></html>
